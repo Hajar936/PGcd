@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+int pgcd(int a, int b) {
+    int r;
+    while (b != 0) {
+        r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+}
+
+int main() {
+    int n, i, j, estPremier;
+
+    // Partie 1 : Affichage des nombres premiers
+    printf("Entrez un nombre entier : ");
+    scanf("%d", &n);
+
+    printf("Nombres premiers inférieurs à %d :\n", n);
+
+    for(i = 2; i < n; i++) {
+        estPremier = 1;
+        for(j = 2; j <= i / 2; j++) {
+            if(i % j == 0) {
+                estPremier = 0;
+                break;
+            }
+        }
+        if(estPremier == 1) {
+            printf("%d ", i);
+        }
+    }
+
+    // Partie 2 : Calcul PGCD, PPCM et produit
+    int a, b, resultat_pgcd, resultat_ppcm;
+    printf("\n\nEntrez deux entiers pour calculer PGCD et PPCM :\n");
+    printf("a = ");
+    scanf("%d", &a);
+    printf("b = ");
+    scanf("%d", &b);
+
+    resultat_pgcd = pgcd(a, b);
+    resultat_ppcm = (a * b) / resultat_pgcd;
+
+    printf("PGCD(%d, %d) = %d\n", a, b, resultat_pgcd);
+    printf("PPCM(%d, %d) = %d\n", a, b, resultat_ppcm);
+    printf("PGCD × PPCM = %d\n", resultat_pgcd * resultat_ppcm);
+    printf("|a × b| = %d\n", a * b);
+
+    return 0;
